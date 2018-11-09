@@ -37,8 +37,10 @@ public class HttpHandler {
             urlConnection.setReadTimeout(10000);
             urlConnection.setConnectTimeout(15000);
             urlConnection.connect();
-            inputStream = urlConnection.getInputStream();
-            jsonResponse = convertStreamToString(inputStream);
+            if(urlConnection.getResponseCode()==200) {
+                inputStream = urlConnection.getInputStream();
+                jsonResponse = convertStreamToString(inputStream);
+            }
 
         } catch (IOException e) {
             //handle the exception
